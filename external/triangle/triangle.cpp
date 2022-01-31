@@ -349,7 +349,12 @@
 #include <cstdlib>
 #include <cstring>
 #include <cmath>
+
+#ifndef _string_h
+#define _string_h
 #include <string>
+#endif
+
 #include <stdexcept>
 #ifndef NO_TIMER
 #include <sys/time.h>
