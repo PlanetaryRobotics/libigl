@@ -18,15 +18,17 @@
 #  define IGL_PREVIOUSLY_DEFINED_VOID VOID
 #  undef VOID
 #endif
-#define ANSI_DECLARATORS
+#define ANSI_DECLARATORS 1
 #define REAL double
 #define VOID int
+#define TRILIBRARY 1
 
 extern "C"
 {
-#include <triangle.h>
+#include "../../../external/triangle/triangle.h"
 }
 
+#undef TRILIBRARY
 #undef ANSI_DECLARATORS
 #ifdef IGL_PREVIOUSLY_DEFINED_ANSI_DECLARATORS
 #  define ANSI_DECLARATORS IGL_PREVIOUSLY_DEFINED_ANSI_DECLARATORS

@@ -8,8 +8,16 @@
 // obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef IGL_TRIANGLE_TRIANGULATE_H
 #define IGL_TRIANGLE_TRIANGULATE_H
+
+#ifndef IGL_INLINE
 #include "../igl_inline.h"
+#endif
+
+#ifndef _string_h
+#define _string_h
 #include <string>
+#endif
+
 #include <Eigen/Core>
 
 namespace igl

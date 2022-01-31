@@ -15,6 +15,13 @@
 /*                                                                           */
 /*****************************************************************************/
 
+#ifndef _triangle_h_
+#define _triangle_h_
+
+#ifndef IGL_INLINE
+#include "../include/igl/igl_inline.h"
+#endif
+
 /*****************************************************************************/
 /*                                                                           */
 /*  How to call Triangle from another program                                */
@@ -279,7 +286,12 @@ struct triangulateio {
   int numberofedges;                                             /* Out only */
 };
 
-void triangulate(char *, struct triangulateio *, struct triangulateio *,
+IGL_INLINE void triangulate(char *, struct triangulateio *, struct triangulateio *,
                  struct triangulateio *);
-void trifree(VOID *memptr);
+IGL_INLINE void trifree(VOID *memptr);
 
+#ifndef IGL_STATIC_LIBRARY
+#  include "triangle.cpp"
+#endif
+
+#endif
