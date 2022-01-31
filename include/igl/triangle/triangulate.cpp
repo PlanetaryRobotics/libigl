@@ -25,7 +25,7 @@
 
 extern "C"
 {
-#include "../../../external/triangle/triangle.h"
+#include "../../../../triangle/triangle.h"
 }
 
 #undef TRILIBRARY
