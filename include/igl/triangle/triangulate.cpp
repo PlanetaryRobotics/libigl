@@ -18,15 +18,17 @@
 #  define IGL_PREVIOUSLY_DEFINED_VOID VOID
 #  undef VOID
 #endif
-#define ANSI_DECLARATORS
+#define ANSI_DECLARATORS 1
 #define REAL double
 #define VOID int
+#define TRILIBRARY 1
 
 extern "C"
 {
-#include <triangle.h>
+#include "../../../../triangle/triangle.h"
 }
 
+#undef TRILIBRARY
 #undef ANSI_DECLARATORS
 #ifdef IGL_PREVIOUSLY_DEFINED_ANSI_DECLARATORS
 #  define ANSI_DECLARATORS IGL_PREVIOUSLY_DEFINED_ANSI_DECLARATORS
@@ -94,7 +96,7 @@ IGL_INLINE void igl::triangle::triangulate(
   assert(H.size() == 0 || H.cols() == 2);
 
   // Prepare the flags
-  string full_flags = flags + "pz" + (EM.size() || VM.size() ? "" : "B");
+  string full_flags = flags + "z" + (EM.size() || VM.size() ? "" : "B");
 
   typedef Map< Matrix<double,Dynamic,Dynamic,RowMajor> > MapXdr;
   typedef Map< Matrix<int,Dynamic,Dynamic,RowMajor> > MapXir;
