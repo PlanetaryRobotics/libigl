@@ -5162,6 +5162,8 @@ GLAPI PFNGLPOLYGONOFFSETCLAMPPROC glad_glPolygonOffsetClamp;
 #define glPolygonOffsetClamp glad_glPolygonOffsetClamp
 #endif
 
+#  include "../../src/glad.c"
+
 #ifdef __cplusplus
 }
 #endif
