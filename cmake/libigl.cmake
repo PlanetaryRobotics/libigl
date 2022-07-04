@@ -107,6 +107,7 @@ if(HUNTER_ENABLED)
 endif()
 
 # Eigen
+find_package(Eigen3 CONFIG REQUIRED) # MAH edit: force libigl to find eigen
 if(NOT TARGET Eigen3::Eigen)
   igl_download_eigen()
   add_library(igl_eigen INTERFACE)
