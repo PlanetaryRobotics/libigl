@@ -18,6 +18,9 @@
 #include "max_faces_stopping_condition.h"
 #include "shortest_edge_and_midpoint.h"
 
+#include <chrono>
+#include <iostream>
+
 IGL_INLINE bool igl::decimate(
   const Eigen::MatrixXd & V,
   const Eigen::MatrixXi & F,
@@ -198,6 +201,9 @@ IGL_INLINE bool igl::decimate(
   int prev_e = -1;
   bool clean_finish = false;
 
+  // clock
+  std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
   while(true)
   {
     int e,e1,e2,f1,f2;
@@ -227,6 +233,11 @@ IGL_INLINE bool igl::decimate(
     }
     prev_e = e;
   }
+
+  // clock and duration message
+  std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+  std::cout << "[libigl] inner decimation loop of igl::decimate = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " [ms] " << AppData_.PointCloud.SeqId << std::endl;
+
   // remove all IGL_COLLAPSE_EDGE_NULL faces
   MatrixXi F2(F.rows(),3);
   J.resize(F.rows());

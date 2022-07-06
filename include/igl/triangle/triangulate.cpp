@@ -44,6 +44,9 @@ extern "C"
 #  define VOID IGL_PREVIOUSLY_DEFINED_VOID
 #endif
 
+#include <chrono>
+#include <iostream>
+
 template <
  typename DerivedV,
  typename DerivedE,
@@ -145,8 +148,15 @@ IGL_INLINE void igl::triangle::triangulate(
   out.segmentmarkerlist = NULL;
   out.pointmarkerlist = NULL;
 
+  // clock
+  std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
   // Call triangle
   ::triangulate(const_cast<char*>(full_flags.c_str()), &in, &out, 0);
+
+  // clock and duration message
+  std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+  std::cout << "[libigl] Call to Triangle::triangulate = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " [ms] " << AppData_.PointCloud.SeqId << std::endl;
 
   // Return the mesh
   V2 = MapXdr(out.pointlist,out.numberofpoints,2).cast<typename DerivedV2::Scalar>();

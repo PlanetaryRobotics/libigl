@@ -20,6 +20,9 @@
 #include "slice.h"
 #include "slice_mask.h"
 
+#include <chrono>
+#include <iostream>
+
 IGL_INLINE bool igl::qslim(
   const Eigen::MatrixXd & V,
   const Eigen::MatrixXi & F,
@@ -63,6 +66,10 @@ IGL_INLINE bool igl::qslim(
   decimate_post_collapse_callback      post_collapse;
   qslim_optimal_collapse_edge_callbacks(
     E,quadrics,v1,v2, cost_and_placement, pre_collapse,post_collapse);
+
+  // clock
+  std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
   // Call to greedy decimator
   bool ret = decimate(
     VO, FO,
@@ -72,6 +79,11 @@ IGL_INLINE bool igl::qslim(
     post_collapse,
     E, EMAP, EF, EI,
     U, G, J, I);
+  
+  // clock and duration message
+  std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+  std::cout << "[libigl] Call to igl::decimate within igl::qslim = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " [ms] " << AppData_.PointCloud.SeqId << std::endl;
+  
   // Remove phony boundary faces and clean up
   const Eigen::Array<bool,Eigen::Dynamic,1> keep = (J.array()<orig_m);
   igl::slice_mask(Eigen::MatrixXi(G),keep,1,G);
