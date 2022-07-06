@@ -156,7 +156,7 @@ IGL_INLINE void igl::triangle::triangulate(
 
   // clock and duration message
   std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-  std::cout << "[libigl] Call to Triangle::triangulate = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " [ms] " << AppData_.PointCloud.SeqId << std::endl;
+  std::cout << "[libigl] Call to Triangle::triangulate = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " [ms]" << std::endl;
 
   // Return the mesh
   V2 = MapXdr(out.pointlist,out.numberofpoints,2).cast<typename DerivedV2::Scalar>();
