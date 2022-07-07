@@ -236,7 +236,7 @@ IGL_INLINE bool igl::decimate(
 
   // clock and duration message
   std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-  std::cout << "[libigl] inner decimation loop of igl::decimate = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " [ms]" << std::endl;
+  std::cout << "[mapper libigl] inner decimation loop of igl::decimate = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " [ms]" << std::endl;
 
   // remove all IGL_COLLAPSE_EDGE_NULL faces
   MatrixXi F2(F.rows(),3);

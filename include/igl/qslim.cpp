@@ -82,7 +82,7 @@ IGL_INLINE bool igl::qslim(
   
   // clock and duration message
   std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-  std::cout << "[libigl] Call to igl::decimate within igl::qslim = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " [ms]" << std::endl;
+  std::cout << "[mapper libigl] Call to igl::decimate within igl::qslim = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " [ms]" << std::endl;
   
   // Remove phony boundary faces and clean up
   const Eigen::Array<bool,Eigen::Dynamic,1> keep = (J.array()<orig_m);
