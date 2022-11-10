@@ -11,7 +11,7 @@
 #include <functional>
 
 //#warning "Defining IGL_PARALLEL_FOR_FORCE_SERIAL"
-//#define IGL_PARALLEL_FOR_FORCE_SERIAL
+#define IGL_PARALLEL_FOR_FORCE_SERIAL
 
 namespace igl
 {
