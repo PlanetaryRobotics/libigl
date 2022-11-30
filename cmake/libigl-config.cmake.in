@@ -27,5 +27,13 @@ if (TARGET igl::common)
   endif()
 endif()
 
+if (TARGET igl::triangle)
+  if (TARGET Eigen3::Eigen)
+    # Inject dependency
+    set_target_properties(igl::triangle PROPERTIES INTERFACE_LINK_LIBRARIES Eigen3::Eigen)
+    set(libigl_triangle_FOUND TRUE)
+  endif()
+endif()
+
 check_required_components(libigl)
 

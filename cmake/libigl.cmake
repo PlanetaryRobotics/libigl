@@ -538,6 +538,7 @@ install(
   TARGETS
     igl
     igl_common
+    igl_triangle
 #    ${IGL_EIGEN}
   EXPORT igl-export
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
@@ -549,6 +550,7 @@ export(
   TARGETS
     igl
     igl_common
+    igl_triangle
 #    ${IGL_EIGEN}
   FILE libigl-export.cmake
 )
@@ -556,6 +558,7 @@ export(
 # Install headers for core library
 install_dir_files(core)
 install_dir_files(copyleft)
+install_dir_files(triangle)
 
 # Write package configuration file
 configure_package_config_file(
