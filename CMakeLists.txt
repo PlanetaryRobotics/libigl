@@ -12,22 +12,24 @@ HunterGate(
 project(libigl)
 
 # Detects whether this is a top-level project
-get_directory_property(LIBIGL_PARENT_DIR PARENT_DIRECTORY)
-if(NOT LIBIGL_PARENT_DIR)
-	set(LIBIGL_TOPLEVEL_PROJECT ON)
-else()
-	set(LIBIGL_TOPLEVEL_PROJECT OFF)
-endif()
+# get_directory_property(LIBIGL_PARENT_DIR PARENT_DIRECTORY)
+# if(NOT LIBIGL_PARENT_DIR)
+#	set(LIBIGL_TOPLEVEL_PROJECT ON)
+#else()
+#	set(LIBIGL_TOPLEVEL_PROJECT OFF)
+#endif()
+set(LIBIGL_TOPLEVEL_PROJECT OFF)
 
 # Build tests and tutorials
 option(LIBIGL_BUILD_TESTS      "Build libigl unit test"        ${LIBIGL_TOPLEVEL_PROJECT})
 option(LIBIGL_BUILD_TUTORIALS  "Build libigl tutorial"         ${LIBIGL_TOPLEVEL_PROJECT})
-option(LIBIGL_EXPORT_TARGETS   "Export libigl CMake targets"   ${LIBIGL_TOPLEVEL_PROJECT})
+#option(LIBIGL_EXPORT_TARGETS   "Export libigl CMake targets"   ${LIBIGL_TOPLEVEL_PROJECT})
+option(LIBIGL_EXPORT_TARGETS   "Export libigl CMake targets"   ON)
 
 # USE_STATIC_LIBRARY speeds up the generation of multiple binaries,
 # at the cost of a longer initial compilation time
 # (by default, static build is off since libigl is a header-only library)
-option(LIBIGL_USE_STATIC_LIBRARY "Use libigl as static library" OFF)
+option(LIBIGL_USE_STATIC_LIBRARY "Use libigl as static library" ON)
 
 # All dependencies that are downloaded as cmake projects and tested on the auto-builds are ON
 # (by default, all build options are off)
@@ -38,7 +40,7 @@ option(LIBIGL_WITH_OPENGL_GLFW       "Use GLFW"                     OFF)
 option(LIBIGL_WITH_OPENGL_GLFW_IMGUI "Use ImGui"                    OFF)
 option(LIBIGL_WITH_PNG               "Use PNG"                      OFF)
 option(LIBIGL_WITH_TETGEN            "Use Tetgen"                   OFF)
-option(LIBIGL_WITH_TRIANGLE          "Use Triangle"                 OFF)
+option(LIBIGL_WITH_TRIANGLE          "Use Triangle"                 ON)
 option(LIBIGL_WITH_PREDICATES        "Use exact predicates"         OFF)
 option(LIBIGL_WITH_XML               "Use XML"                      OFF)
 option(LIBIGL_WITH_PYTHON            "Use Python"                   OFF)

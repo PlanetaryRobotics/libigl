@@ -101,22 +101,25 @@ if(UNIX AND NOT HUNTER_ENABLED)
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 endif()
 
-if(HUNTER_ENABLED)
-  hunter_add_package(Eigen)
-  find_package(Eigen3 CONFIG REQUIRED)
-endif()
+# if(HUNTER_ENABLED)
+#   hunter_add_package(Eigen)
+#   find_package(Eigen3 CONFIG REQUIRED)
+# endif()
 
 # Eigen
-if(NOT TARGET Eigen3::Eigen)
-  igl_download_eigen()
-  add_library(igl_eigen INTERFACE)
-  target_include_directories(igl_eigen SYSTEM INTERFACE
-    $<BUILD_INTERFACE:${LIBIGL_EXTERNAL}/eigen>
-    $<INSTALL_INTERFACE:include>
-  )
-  set_property(TARGET igl_eigen PROPERTY EXPORT_NAME Eigen3::Eigen)
-  add_library(Eigen3::Eigen ALIAS igl_eigen)
-endif()
+# if(NOT TARGET Eigen3::Eigen)
+#   igl_download_eigen()
+#   add_library(igl_eigen INTERFACE)
+#   target_include_directories(igl_eigen SYSTEM INTERFACE
+#     $<BUILD_INTERFACE:${LIBIGL_EXTERNAL}/eigen>
+#     $<INSTALL_INTERFACE:include>
+#   )
+#   set_property(TARGET igl_eigen PROPERTY EXPORT_NAME Eigen3::Eigen)
+#   add_library(Eigen3::Eigen ALIAS igl_eigen)
+# endif()
+# target_link_libraries(igl_common INTERFACE Eigen3::Eigen)
+
+find_package(Eigen3 CONFIG REQUIRED)
 target_link_libraries(igl_common INTERFACE Eigen3::Eigen)
 
 # C++11 Thread library
@@ -440,11 +443,12 @@ endif()
 ################################################################################
 ### Compile the triangle part ###
 if(LIBIGL_WITH_TRIANGLE)
-  set(TRIANGLE_DIR "${LIBIGL_EXTERNAL}/triangle")
-  if(NOT TARGET triangle)
-    igl_download_triangle()
-    add_subdirectory("${TRIANGLE_DIR}" "triangle")
-  endif()
+  set(TRIANGLE_DIR "${LIBIGL_ROOT}/../triangle")
+#  if(NOT TARGET triangle)
+#    igl_download_triangle()
+#    add_subdirectory("${TRIANGLE_DIR}" "triangle")
+#  endif()
+  add_subdirectory("${TRIANGLE_DIR}" "triangle")
   compile_igl_module("triangle")
   target_link_libraries(igl_triangle ${IGL_SCOPE} triangle)
   target_include_directories(igl_triangle ${IGL_SCOPE} ${TRIANGLE_DIR})
@@ -522,19 +526,19 @@ endfunction()
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-if(TARGET igl_eigen)
-  set(IGL_EIGEN igl_eigen)
-else()
-  set(IGL_EIGEN)
-  message(WARNING "Trying to export igl targets while using an imported target for Eigen.")
-endif()
+#if(TARGET igl_eigen)
+#  set(IGL_EIGEN igl_eigen)
+#else()
+#  set(IGL_EIGEN)
+#  message(WARNING "Trying to export igl targets while using an imported target for Eigen.")
+#endif()
 
 # Install and export core library
 install(
   TARGETS
     igl
     igl_common
-    ${IGL_EIGEN}
+#    ${IGL_EIGEN}
   EXPORT igl-export
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -545,7 +549,7 @@ export(
   TARGETS
     igl
     igl_common
-    ${IGL_EIGEN}
+#    ${IGL_EIGEN}
   FILE libigl-export.cmake
 )
 
