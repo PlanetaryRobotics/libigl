@@ -526,20 +526,21 @@ endfunction()
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-#if(TARGET igl_eigen)
-#  set(IGL_EIGEN igl_eigen)
-#else()
-#  set(IGL_EIGEN)
-#  message(WARNING "Trying to export igl targets while using an imported target for Eigen.")
-#endif()
+if(TARGET igl_eigen)
+  set(IGL_EIGEN igl_eigen)
+else()
+  set(IGL_EIGEN)
+  message(WARNING "Trying to export igl targets while using an imported target for Eigen.")
+endif()
 
 # Install and export core library
 install(
   TARGETS
     igl
     igl_common
+    triangle
     igl_triangle
-#    ${IGL_EIGEN}
+    ${IGL_EIGEN}
   EXPORT igl-export
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -550,8 +551,9 @@ export(
   TARGETS
     igl
     igl_common
+    triangle
     igl_triangle
-#    ${IGL_EIGEN}
+    ${IGL_EIGEN}
   FILE libigl-export.cmake
 )
 
