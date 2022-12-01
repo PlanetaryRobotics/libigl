@@ -530,7 +530,7 @@ if(TARGET igl_eigen)
   set(IGL_EIGEN igl_eigen)
 else()
   set(IGL_EIGEN)
-  message(WARNING "Trying to export igl targets while using an imported target for Eigen.")
+  # message(WARNING "Trying to export igl targets while using an imported target for Eigen.")
 endif()
 
 # Install and export core library
@@ -538,8 +538,7 @@ install(
   TARGETS
     igl
     igl_common
-    triangle
-    igl_triangle
+    # igl_triangle
     ${IGL_EIGEN}
   EXPORT igl-export
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
@@ -551,8 +550,7 @@ export(
   TARGETS
     igl
     igl_common
-    triangle
-    igl_triangle
+    # igl_triangle
     ${IGL_EIGEN}
   FILE libigl-export.cmake
 )
@@ -560,7 +558,7 @@ export(
 # Install headers for core library
 install_dir_files(core)
 install_dir_files(copyleft)
-install_dir_files(triangle)
+# install_dir_files(triangle)
 
 # Write package configuration file
 configure_package_config_file(
