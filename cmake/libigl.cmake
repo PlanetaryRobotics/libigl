@@ -443,15 +443,15 @@ endif()
 ################################################################################
 ### Compile the triangle part ###
 if(LIBIGL_WITH_TRIANGLE)
-  set(TRIANGLE_DIR "${LIBIGL_ROOT}/../triangle")
+  find_package(triangle REQUIRED)
 #  if(NOT TARGET triangle)
 #    igl_download_triangle()
 #    add_subdirectory("${TRIANGLE_DIR}" "triangle")
 #  endif()
-  add_subdirectory("${TRIANGLE_DIR}" "triangle")
+  # add_subdirectory("${TRIANGLE_DIR}" "triangle")
   compile_igl_module("triangle")
   target_link_libraries(igl_triangle ${IGL_SCOPE} triangle)
-  target_include_directories(igl_triangle ${IGL_SCOPE} ${TRIANGLE_DIR})
+  # target_include_directories(igl_triangle ${IGL_SCOPE} ${triangle_INCLUDE_DIR})
 endif()
 
 ################################################################################
@@ -538,7 +538,7 @@ install(
   TARGETS
     igl
     igl_common
-    # igl_triangle
+    igl_triangle
     ${IGL_EIGEN}
   EXPORT igl-export
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
@@ -550,7 +550,7 @@ export(
   TARGETS
     igl
     igl_common
-    # igl_triangle
+    igl_triangle
     ${IGL_EIGEN}
   FILE libigl-export.cmake
 )
@@ -558,7 +558,7 @@ export(
 # Install headers for core library
 install_dir_files(core)
 install_dir_files(copyleft)
-# install_dir_files(triangle)
+install_dir_files(triangle)
 
 # Write package configuration file
 configure_package_config_file(
@@ -581,4 +581,3 @@ install(EXPORT igl-export DESTINATION ${CMAKE_INSTALL_DATADIR}/libigl/cmake FILE
 
 
 export(PACKAGE libigl)
-
